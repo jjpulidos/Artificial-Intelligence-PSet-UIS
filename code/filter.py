@@ -4,8 +4,6 @@ import scipy.linalg as linalg
 import numpy.random as random
 from numpy import dot
 
-
-
 def multiply_gaussians(mu1, std1, mu2, std2):
     std1 = std1 if std1!=0 else 1.e-80
     std2 = std2 if std2!=0 else 1.e-80
@@ -17,7 +15,6 @@ def add_gaussians(mu1, std1, mu2, std2):
     mean = mu1 + mu2
     std  = np.sqrt(std1**2 + std2**2)
     return mean, std
-
 
 def g_h_filter(measurements, init_pos, init_vel, g, h):
     print ("using g_h_filter at filter.py")
@@ -40,11 +37,10 @@ def g_h_filter(measurements, init_pos, init_vel, g, h):
 def plot_moves(real_x, measured_x=None, filter_x=None, g=None, h=None, ylim=None):
     time = np.arange(len(real_x))
     plt.plot(time, real_x, lw=2, color="red", alpha=0.5, label="real")    
-    if measured_x!=None:
+    if not (measured_x is None):
         plt.plot(time, measured_x, lw=1, color="black", ls="--", label="measured", alpha=.5)
-    if filter_x!=None:
+    if not (filter_x is None):
         plt.plot(time, filter_x, lw=2, color="green", alpha=0.8, label="filter")
-        
     if g!=None and h!=None:
         plt.title("$g=%.2f$    $h=%.2f$"%(g,h))
     plt.legend(loc='lower right') #, bbox_to_anchor=(1, 0.5))
